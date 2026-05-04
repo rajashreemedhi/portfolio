@@ -1,44 +1,45 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react'; // 1. Make sure useState is imported
 import "./App.css";
 
 function App() {
+  // 2. THIS LINE IS THE FIX - It must be inside the function
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   useEffect(() => {
-    // We wait 100ms to ensure the DOM is fully painted
-    const timer = setTimeout(() => {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              console.log("BOOM! Visible:", entry.target.id);
-              entry.target.classList.add('reveal-visible');
-            }
-          });
-        },
-        { threshold: 0.1 }
-      );
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('reveal-visible');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
 
-      const targets = document.querySelectorAll('.reveal-hidden');
+    const targets = document.querySelectorAll('.reveal-hidden');
+    targets.forEach((target) => observer.observe(target));
 
-      if (targets.length === 0) {
-        console.warn("Wait... I can't find any elements with class 'reveal-hidden'!");
-      }
-
-      targets.forEach((target) => observer.observe(target));
-    }, 100);
-
-    return () => clearTimeout(timer);
+    return () => observer.disconnect();
   }, []);
-
 
   return (
     <div className="portfolio-wrapper">
-      {/* NAVIGATION */}
       <nav className="navbar">
         <div className="nav-logo">RM</div>
-        <div className="nav-links">
-          <a href="#about">About</a>
-          <a href="#stack">Technical Stack</a>
-          <a href="#projects">Case Study</a>
+
+        {/* The Hamburger Button */}
+        <button className="menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          <div className={isMenuOpen ? "bar open" : "bar"}></div>
+          <div className={isMenuOpen ? "bar open" : "bar"}></div>
+          <div className={isMenuOpen ? "bar open" : "bar"}></div>
+        </button>
+
+        {/* The Links */}
+        <div className={isMenuOpen ? "nav-links active" : "nav-links"}>
+          <a href="#about" onClick={() => setIsMenuOpen(false)}>About</a>
+          <a href="#stack" onClick={() => setIsMenuOpen(false)}>Technical Stack</a>
+          <a href="#projects" onClick={() => setIsMenuOpen(false)}>Case Study</a>
         </div>
       </nav>
 

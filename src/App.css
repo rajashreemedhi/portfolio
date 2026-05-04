@@ -330,99 +330,145 @@ section {
   }
 }
 
-/* --- MOBILE RESPONSIVENESS FIXES --- */
+/* --- UPDATED MOBILE RESPONSIVENESS --- */
+
+/* Basic Menu Toggle Styling */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 10001;
+}
+
+.bar {
+  width: 25px;
+  height: 2px;
+  background-color: var(--accent-gold);
+  transition: 0.3s;
+}
+
+/* --- UPDATED MOBILE RESPONSIVENESS --- */
 
 @media (max-width: 768px) {
 
-  /* 1. Global Spacing */
-  section {
-    width: 95%;
-    /* Give more room on small screens */
-    padding: 40px 20px;
-    /* Reduce massive desktop padding */
-    margin: 40px auto;
+  /* 1. Show the Hamburger Button */
+  .menu-toggle {
+    display: flex;
+    z-index: 10001;
+    /* Must be higher than the links */
   }
 
-  /* 2. Hero Section Adjustments */
+  /* 2. Fix the Mobile Menu Overlay */
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    /* Start hidden */
+    height: 100vh;
+
+    /* FIX: Changed from 100% to 70% or 280px for a drawer look */
+    width: 75%;
+    max-width: 300px;
+
+    background: #1A2A35;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* ADD: A shadow to make it pop over the blurred background */
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+    z-index: 10000;
+    border-left: 1px solid rgba(197, 160, 89, 0.2);
+  }
+
+  .nav-links.active {
+    right: 0;
+    /* Slide in from the right */
+  }
+
+  .navbar {
+    overflow: visible;
+  }
+
+  .nav-links a {
+    font-size: 1.5rem;
+    /* Large tap targets for fingers */
+    letter-spacing: 3px;
+    color: var(--text-cream);
+  }
+
+  /* 3. Fix Squashed Hero Section */
   .hero {
     padding: 0 20px;
+    border-width: 10px;
+    /* Thinner gold border */
   }
 
   .hero h1 {
-    font-size: 2.8rem;
-    /* Shrink the giant name */
+    font-size: 2.2rem;
     line-height: 1.2;
   }
 
   .hero-sub {
-    letter-spacing: 3px;
-    /* Reduce spacing to prevent wrapping */
     font-size: 0.75rem;
+    letter-spacing: 2px;
+    max-width: 300px;
+    margin: 0 auto;
   }
 
-  /* 3. Navbar */
-  .navbar {
-    padding: 0 5%;
+  /* 4. Fix Squashed Glass Sections */
+  section {
+    width: 92%;
+    padding: 40px 20px;
+    /* More room for content */
+    margin: 30px auto;
+    backdrop-filter: blur(10px);
+    /* Slightly less blur for performance */
   }
 
-  .nav-links {
-    display: none;
-    /* Hide desktop links; you'd usually use a burger menu here */
-  }
-
-  /* 4. Section Headers */
   .section-title {
     font-size: 1.8rem;
-    /* Make titles readable on one line */
   }
 
-  .accent-bar {
-    height: 40px;
-    /* Shorten the gold line */
-  }
-
-  /* 5. Technical Stack Grid */
+  /* 5. Stack the Technical Stack Boxes */
   .skills-grid {
     flex-direction: column;
-    /* Stack boxes vertically */
-    align-items: center;
+    gap: 20px;
   }
 
   .skill-item {
     width: 100%;
-    /* Take full width of the section */
     max-width: none;
     padding: 30px 20px;
   }
 
-  /* 6. Case Study Section */
+  /* 6. Fix Case Study Layout */
   .project-presentation-card {
-    padding: 30px 20px;
-  }
-
-  .project-name {
-    font-size: 1.6rem;
+    padding: 30px 15px;
   }
 
   .project-metadata-grid {
     grid-template-columns: 1fr;
-    /* Stack Features/Functionality/Outcome */
-    gap: 25px;
-    padding-top: 25px;
+    /* Stack metadata blocks */
+    gap: 30px;
   }
 
-  /* 7. Animations - Slightly faster for mobile feel */
-  .reveal-hidden {
-    transform: translateY(30px);
-    transition-duration: 0.6s;
+  /* Hamburger Animation to 'X' */
+  .bar.open:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
   }
 
-  /* 8. Footer */
-  .footer h2 {
-    font-size: 1.8rem;
+  .bar.open:nth-child(2) {
+    opacity: 0;
   }
 
-  .contact-link {
-    font-size: 1rem;
+  .bar.open:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
   }
 }
