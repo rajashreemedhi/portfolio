@@ -329,3 +329,100 @@ section {
     padding: 60px 5%;
   }
 }
+
+/* --- MOBILE RESPONSIVENESS FIXES --- */
+
+@media (max-width: 768px) {
+
+  /* 1. Global Spacing */
+  section {
+    width: 95%;
+    /* Give more room on small screens */
+    padding: 40px 20px;
+    /* Reduce massive desktop padding */
+    margin: 40px auto;
+  }
+
+  /* 2. Hero Section Adjustments */
+  .hero {
+    padding: 0 20px;
+  }
+
+  .hero h1 {
+    font-size: 2.8rem;
+    /* Shrink the giant name */
+    line-height: 1.2;
+  }
+
+  .hero-sub {
+    letter-spacing: 3px;
+    /* Reduce spacing to prevent wrapping */
+    font-size: 0.75rem;
+  }
+
+  /* 3. Navbar */
+  .navbar {
+    padding: 0 5%;
+  }
+
+  .nav-links {
+    display: none;
+    /* Hide desktop links; you'd usually use a burger menu here */
+  }
+
+  /* 4. Section Headers */
+  .section-title {
+    font-size: 1.8rem;
+    /* Make titles readable on one line */
+  }
+
+  .accent-bar {
+    height: 40px;
+    /* Shorten the gold line */
+  }
+
+  /* 5. Technical Stack Grid */
+  .skills-grid {
+    flex-direction: column;
+    /* Stack boxes vertically */
+    align-items: center;
+  }
+
+  .skill-item {
+    width: 100%;
+    /* Take full width of the section */
+    max-width: none;
+    padding: 30px 20px;
+  }
+
+  /* 6. Case Study Section */
+  .project-presentation-card {
+    padding: 30px 20px;
+  }
+
+  .project-name {
+    font-size: 1.6rem;
+  }
+
+  .project-metadata-grid {
+    grid-template-columns: 1fr;
+    /* Stack Features/Functionality/Outcome */
+    gap: 25px;
+    padding-top: 25px;
+  }
+
+  /* 7. Animations - Slightly faster for mobile feel */
+  .reveal-hidden {
+    transform: translateY(30px);
+    transition-duration: 0.6s;
+  }
+
+  /* 8. Footer */
+  .footer h2 {
+    font-size: 1.8rem;
+  }
+
+  .contact-link {
+    font-size: 1rem;
+  }
+}
